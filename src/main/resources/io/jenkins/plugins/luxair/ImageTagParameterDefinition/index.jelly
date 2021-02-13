@@ -11,7 +11,7 @@
 
             <select name="imageTag" style="min-width:18rem;">
                 <j:if test="${it.optional}">
-                  <f:option display="${it.optional}" value=":">
+                  <f:option display="${it.optional}" value="">
                     none
                   </f:option>
                 </j:if>
