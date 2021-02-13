@@ -90,6 +90,10 @@ public class ImageTagParameterDefinition extends SimpleParameterDefinition {
         return tagOrder;
     }
 
+    public Boolean getOptional() {
+      return optional;
+    }
+
     @DataBoundSetter
     @SuppressWarnings("unused")
     public void setTagOrder(Ordering tagOrder) {
@@ -163,7 +167,7 @@ public class ImageTagParameterDefinition extends SimpleParameterDefinition {
             ImageTagParameterValue value = (ImageTagParameterValue) defaultValue;
             return new ImageTagParameterDefinition(getName(), getDescription(),
                 getImage(), getFilter(), value.getImageTag(),
-                getRegistry(), getCredentialId(), getTagOrder());
+                getRegistry(), getCredentialId(), getTagOrder(), getOptional());
         }
         return this;
     }
