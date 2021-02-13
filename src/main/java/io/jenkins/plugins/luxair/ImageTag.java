@@ -42,9 +42,6 @@ public class ImageTag {
         ResultContainer<List<String>> filterTags = filterTags(tags.getValue(), filter, ordering);
         filterTags.getErrorMsg().ifPresent(container::setErrorMsg);
         container.setValue(filterTags.getValue());
-        if(optional) {
-          container.getValue().add(0, "none");
-        }
         return container;
     }
 

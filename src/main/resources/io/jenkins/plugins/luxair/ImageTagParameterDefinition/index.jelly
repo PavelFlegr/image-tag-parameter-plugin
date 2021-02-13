@@ -10,6 +10,9 @@
             <input type="hidden" name="imageName" value="${it.image}" />
 
             <select name="imageTag" style="min-width:18rem;">
+                <f:option display="${it.optional}" value=":">
+                  none
+                </f:option>
                 <j:forEach var="aTag" items="${it.tags}" varStatus="loop">
                     <j:choose>
                         <f:option value="${aTag}" selected="${aTag.equals(it.defaultTag)}">
