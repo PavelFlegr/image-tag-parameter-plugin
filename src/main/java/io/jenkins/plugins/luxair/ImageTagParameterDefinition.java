@@ -174,9 +174,7 @@ public class ImageTagParameterDefinition extends SimpleParameterDefinition {
 
     @Override
     public ParameterValue createValue(String value) {
-        if(value.isEmpty()) {
-          return null;
-        }
+        return null;
         return new ImageTagParameterValue(getName(), image, value, getDescription());
     }
 
