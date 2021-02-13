@@ -27,7 +27,7 @@ public class ImageTag {
     }
 
     public static ResultContainer<List<String>> getTags(String image, String registry, String filter,
-                                                        String user, String password, Ordering ordering) {
+                                                        String user, String password, Ordering ordering, Boolean optional) {
         ResultContainer<List<String>> container = new ResultContainer<>(Collections.emptyList());
 
         String[] authService = getAuthService(registry);
@@ -42,6 +42,9 @@ public class ImageTag {
         ResultContainer<List<String>> filterTags = filterTags(tags.getValue(), filter, ordering);
         filterTags.getErrorMsg().ifPresent(container::setErrorMsg);
         container.setValue(filterTags.getValue());
+        if(optional) {
+          container.getValue().add(0, "none");
+        }
         return container;
     }
 

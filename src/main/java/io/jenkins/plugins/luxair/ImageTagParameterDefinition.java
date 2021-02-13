@@ -32,6 +32,7 @@ public class ImageTagParameterDefinition extends SimpleParameterDefinition {
     private static final Logger logger = Logger.getLogger(ImageTagParameterDefinition.class.getName());
     private static final ImageTagParameterConfiguration config = ImageTagParameterConfiguration.get();
 
+    private final Boolean optional;
     private final String image;
     private final String registry;
     private final String filter;
@@ -43,12 +44,12 @@ public class ImageTagParameterDefinition extends SimpleParameterDefinition {
     @DataBoundConstructor
     @SuppressWarnings("unused")
     public ImageTagParameterDefinition(String name, String description, String image, String filter,
-                                       String registry, String credentialId) {
-        this(name, description, image, filter, "", registry, credentialId, config.getDefaultTagOrdering());
+                                       String registry, String credentialId, Boolean optional) {
+        this(name, description, image, filter, "", registry, credentialId, config.getDefaultTagOrdering(), optional);
     }
 
     public ImageTagParameterDefinition(String name, String description, String image, String filter, String defaultTag,
-                                       String registry, String credentialId, Ordering tagOrder) {
+                                       String registry, String credentialId, Ordering tagOrder, Boolean optional) {
         super(name, description);
         this.image = image;
         this.registry = StringUtil.isNotNullOrEmpty(registry) ? registry : config.getDefaultRegistry();
@@ -56,6 +57,7 @@ public class ImageTagParameterDefinition extends SimpleParameterDefinition {
         this.defaultTag = StringUtil.isNotNullOrEmpty(defaultTag) ? defaultTag : "";
         this.credentialId = getDefaultOrEmptyCredentialId(this.registry, credentialId);
         this.tagOrder = tagOrder != null ? tagOrder : config.getDefaultTagOrdering();
+        this.optional = optional;
     }
 
     public String getImage() {
@@ -122,7 +124,7 @@ public class ImageTagParameterDefinition extends SimpleParameterDefinition {
             password = credential.getPassword().getPlainText();
         }
 
-        ResultContainer<List<String>> resultContainer = ImageTag.getTags(image, registry, filter, user, password, tagOrder);
+        ResultContainer<List<String>> resultContainer = ImageTag.getTags(image, registry, filter, user, password, tagOrder, optional);
         Optional<String> optionalErrorMsg = resultContainer.getErrorMsg();
         if (optionalErrorMsg.isPresent()) {
             setErrorMsg(optionalErrorMsg.get());
