@@ -173,9 +173,14 @@ public class ImageTagParameterDefinition extends SimpleParameterDefinition {
     }
 
     @Override
+    public boolean isValid(ParameterValue value) {
+      return false;
+    }
+
+    @Override
     public ParameterValue createValue(String value) {
         return null;
-        return new ImageTagParameterValue(getName(), image, value, getDescription());
+        //return new ImageTagParameterValue(getName(), image, value, getDescription());
     }
 
     @Override
