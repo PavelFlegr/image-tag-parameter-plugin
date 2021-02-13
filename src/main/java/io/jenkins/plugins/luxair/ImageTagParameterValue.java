@@ -58,7 +58,7 @@ public class ImageTagParameterValue extends ParameterValue {
      */
     @Override
     public void buildEnvironment(Run<?, ?> build, EnvVars env) {
-        if(imageTag.equals(':')){
+        if(imageTag.equals(":")){
           return;
         }
         // exposes ImageName
