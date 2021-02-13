@@ -58,6 +58,9 @@ public class ImageTagParameterValue extends ParameterValue {
      */
     @Override
     public void buildEnvironment(Run<?, ?> build, EnvVars env) {
+        if(imageTag.equals(':')){
+          return;
+        }
         // exposes ImageName
         env.put(String.format("%s_IMAGE", name), imageName);
         env.put(String.format("%s_IMAGE", name).toUpperCase(Locale.ENGLISH), imageName); // backward compatibility pre 1.345
